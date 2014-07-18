@@ -8,13 +8,14 @@ angular.module('myApp.controllers', [])
     $scope.formData = {};
 
     $scope.processForm = function() {
+      $scope.message = "Fetching results...";
       $http({
         method: 'JSONP',
         url: 'http://modille-unscrabble-api-rails.herokuapp.com/unscrabble.json?callback=JSON_CALLBACK&rack=' + $scope.formData.rack + '&regex=' + $scope.formData.regex,
       })
       .success( function(response) {
         console.log( response );
-        $scope.message = response.results.toString();
+        $scope.message = "Results: " + response.results.toString();
       });
     };
 
