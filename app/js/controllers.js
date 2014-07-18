@@ -15,7 +15,7 @@ angular.module('myApp.controllers', [])
       })
       .success( function(response) {
         console.log( response );
-        $scope.message = "Results: " + response.results.toString();
+        $scope.message = "Results: " + response.results.join( ', ' );
       });
     };
 
