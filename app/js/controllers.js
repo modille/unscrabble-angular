@@ -3,9 +3,19 @@
 /* Controllers */
 
 angular.module('myApp.controllers', [])
-  .controller('MyCtrl1', ['$scope', function($scope) {
+  .controller('formController', function ($scope, $http) {
 
-  }])
-  .controller('MyCtrl2', ['$scope', function($scope) {
+    $scope.formData = {};
 
-  }]);
+    $scope.processForm = function() {
+      $http({
+        method: 'JSONP',
+        url: 'http://modille-unscrabble-api-rails.herokuapp.com/unscrabble.json?callback=JSON_CALLBACK&rack=' + $scope.formData.rack + '&regex=' + $scope.formData.regex,
+      })
+      .success( function(response) {
+        console.log( response );
+        $scope.message = response.results.toString();
+      });
+    };
+
+  });
